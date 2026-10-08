@@ -114,3 +114,22 @@ button.tool.on { border-color: var(--zc, var(--accent)); box-shadow: 0 0 0 2px c
 .picker-actions { display: flex; gap: 8px; justify-content: center; }
 .picker-actions .primary { font-size: 17px; padding: 8px 18px; }
 .check { flex-direction: row; justify-content: center; align-items: center; gap: 6px; }
+
+.topbar { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.classbar { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.picker-group { display: flex; gap: 6px; align-items: end; }
+label.inline { flex-direction: column; }
+select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; max-width: 200px; }
+.picker-group button { padding: 6px 9px; }
+.account { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.status.error { color: var(--bad); }
+.present-title { position: fixed; top: 14px; left: 18px; z-index: 5; font-weight: 700; font-size: 18px; opacity: .85; }
+.backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 20; }
+.dialog { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; width: min(380px, calc(100vw - 32px)); display: grid; gap: 10px; }
+.dialog h2 { margin: 0; font-size: 18px; text-transform: none; letter-spacing: 0; color: var(--text); }
+.dialog .close { position: absolute; top: 8px; right: 8px; font-size: 16px; }
+.dialog .wide { width: 100%; padding: 10px; }
+.or { text-align: center; color: var(--muted); font-size: 12px; }
+.email-form { display: grid; gap: 8px; }
+.email-form input { padding: 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; }
+.err { color: var(--bad); font-size: 13px; margin: 0; }

@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
-import { useStore } from './store'
+import { useStore, work } from './store'
 import { FIXTURE_TYPES, MAX_SEATS, SNAP, canPlace } from './room'
 import { violations } from './solver'
 import Picker from './Picker'
+import ClassBar from './ClassBar'
+import Account from './Account'
+import { useSync } from './useSync'
 
 const FIXTURE_LABEL = { board: 'BOARD', teacher: 'Teacher', door: '🚪', computers: '💻 COMPUTERS', table: 'Table', shelf: '📚 Shelf' }
 const snap = (n) => Math.round(n / SNAP) * SNAP
 
 export default function App() {
-  const s = useStore()
-  const { room } = s
+  const raw = useStore()
+  const { cls, chart, room, students, assignments, locked } = work(raw)
+  const s = { ...raw, room, students, assignments, locked }
+  const sync = useSync()
   const [names, setNames] = useState('')
   const [dragging, setDragging] = useState(null) // student being dragged (seating mode)
   const [overDesk, setOverDesk] = useState(null)
@@ -114,7 +119,9 @@ export default function App() {
         <aside className="sidebar">
           <h1>Seating Chart</h1>
           <section>
-            <h2>Students ({s.students.length})</h2>
+            <h2>
+              {cls.name} · students ({s.students.length})
+            </h2>
             <textarea
               placeholder="Add names (one per line or comma-separated)"
               value={names}
@@ -169,6 +176,17 @@ export default function App() {
       )}
 
       <main className="main">
+        {!presenting && (
+          <div className="topbar">
+            <ClassBar />
+            <Account sync={sync} />
+          </div>
+        )}
+        {presenting && (
+          <div className="present-title">
+            {cls.name} <span className="hint">· {chart.name}</span>
+          </div>
+        )}
         {presenting && (
           <div className="present-bar">
             <button onClick={() => (pickerOpen ? closePicker() : setPickerOpen(true))}>🎯 Pick a student</button>
